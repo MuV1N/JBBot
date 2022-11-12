@@ -24,15 +24,15 @@ public class ReactionRolesCommand extends CommandObject {
 
     @Override
     public CommandData getCommand() {
-        return Commands.slash("send_reaction_roles_message", common.get("command.srm.description"))
-                .addOption(OptionType.CHANNEL, "", common.get(common.get("command.srm.description")))
+        return Commands.slash("srm", common.get("command.srm.description"))
+                .addOption(OptionType.CHANNEL, "channel", common.get(common.get("command.srm.type.channel.description")), true, true)
                 .setDefaultPermissions(DefaultMemberPermissions.enabledFor(ADMINISTRATOR));
     }
 
     @Override
     public void respond(SlashCommandInteractionEvent e) {
         final Member member = e.getMember();
-        if (!e.getName().equals("send_reaction_roles_message")) return;
+        if (!e.getName().equals("srm")) return;
         assert member != null;
         //if (jbBot.getPermission().canManageAll(member)){
             e.getChannel().sendMessageEmbeds(new EmbedBuilder()
