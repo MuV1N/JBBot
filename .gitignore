@@ -1,0 +1,4 @@
+# Project exclude paths
+/.gradle/
+/build/
+/src/main/java/de/muv1n/jbbot/util/Token.java
