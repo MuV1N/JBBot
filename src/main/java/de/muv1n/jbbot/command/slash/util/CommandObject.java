@@ -3,6 +3,7 @@ package de.muv1n.jbbot.command.slash.util;
 import de.muv1n.jbbot.JBBot;
 import de.muv1n.jbbot.translation.CommonTranslation;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.CommandAutoCompleteInteraction;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import org.jetbrains.annotations.NotNull;

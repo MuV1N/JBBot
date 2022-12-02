@@ -40,6 +40,7 @@ public class JBBot {
 
         this.bot = bot;
         System.out.println("§2BOT ONLINE");
+        commandManager.load(this, this.common);
 
 
         new Stop(bot, builder);

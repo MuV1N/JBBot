@@ -4,8 +4,11 @@ import de.muv1n.jbbot.JBBot;
 import de.muv1n.jbbot.command.slash.util.CommandObject;
 import de.muv1n.jbbot.translation.CommonTranslation;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.interactions.commands.Command;
 import net.dv8tion.jda.api.interactions.commands.CommandAutoCompleteInteraction;
 import net.dv8tion.jda.api.interactions.commands.DefaultMemberPermissions;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
@@ -15,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 
-import static net.dv8tion.jda.api.Permission.ADMINISTRATOR;
+import static net.dv8tion.jda.api.Permission.*;
 
 public class ReactionRolesCommand extends CommandObject {
     public ReactionRolesCommand(@NotNull JBBot jbBot, @NotNull CommonTranslation common) {
@@ -25,8 +28,8 @@ public class ReactionRolesCommand extends CommandObject {
     @Override
     public CommandData getCommand() {
         return Commands.slash("srm", common.get("command.srm.description"))
-                .addOption(OptionType.CHANNEL, "channel", common.get(common.get("command.srm.type.channel.description")), true, true)
-                .setDefaultPermissions(DefaultMemberPermissions.enabledFor(ADMINISTRATOR));
+                .addOption(OptionType.CHANNEL, "channel", common.get(common.get("command.srm.type.channel.description")), true)
+                .setDefaultPermissions(DefaultMemberPermissions.enabledFor(VIEW_AUDIT_LOGS));
     }
 
     @Override
@@ -34,21 +37,13 @@ public class ReactionRolesCommand extends CommandObject {
         final Member member = e.getMember();
         if (!e.getName().equals("srm")) return;
         assert member != null;
-        //if (jbBot.getPermission().canManageAll(member)){
-            e.getChannel().sendMessageEmbeds(new EmbedBuilder()
-                    .setColor(new Color(44, 56, 172))
-                    .setTitle(common.get("command.srm.embed.title")).build()).queue();
+        TextChannel channel = e.getOption("channel").getAsChannel().asTextChannel();
+            channel.sendMessageEmbeds(new EmbedBuilder()
+                    .setColor(new Color(47, 49, 54))
+                    .setTitle(common.get("command.srm.embed.title", e.getUserLocale()))
+                    .setDescription(common.get("command.srm.embed.description", e.getUserLocale())).build()).queue();
 
-        //}
-
-
-        /*if (!e.getMember().hasPermission(Permission.ADMINISTRATOR)) {
-            e.getUser().openPrivateChannel().queue(ch -> {
-                ch.sendMessageEmbeds(new EmbedBuilder()
-                        .setColor(new Color(22, 42, 170))
-                        .setTitle(c.get("command.srm.embed.title", e.getUserLocale()))
-                        .setDescription(c.get("command.srm.embed.description", e.getUserLocale())).build()).queue();
-            });*/
+            e.reply(common.get("command.srm.reply.success","<#" + e.getOption("channel").getAsChannel().getId() + ">", e.getUserLocale())).setEphemeral(true).queue();
 
         }
 
