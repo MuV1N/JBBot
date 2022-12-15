@@ -1,7 +1,11 @@
 package de.muv1n.jbbot;
 
+import de.muv1n.jbbot.command.slash.ReactionRolesButtonInteraction;
 import de.muv1n.jbbot.command.slash.util.CommandManager;
+import de.muv1n.jbbot.event.JoinEvent;
+import de.muv1n.jbbot.event.QuitEent;
 import de.muv1n.jbbot.translation.CommonTranslation;
+import de.muv1n.jbbot.twitch.TwitchInit;
 import de.muv1n.jbbot.util.Stop;
 import lombok.AllArgsConstructor;
 import net.dv8tion.jda.api.JDA;
@@ -32,6 +36,7 @@ public class JBBot {
         builder.enableIntents(intent);
         builder.disableCache(CacheFlag.MEMBER_OVERRIDES, CacheFlag.VOICE_STATE);
         builder.setBulkDeleteSplittingEnabled(false);
+        builder.addEventListeners(new JoinEvent(this), new QuitEent(this), new ReactionRolesButtonInteraction(this));
         builder.setActivity(Activity.playing(common.get("activity")));
         builder.setStatus(OnlineStatus.ONLINE);
         builder.addEventListeners(commandManager);
@@ -42,7 +47,7 @@ public class JBBot {
         System.out.println("§2BOT ONLINE");
         commandManager.load(this, this.common);
 
-
+        new TwitchInit(this);
         new Stop(bot, builder);
     }
 

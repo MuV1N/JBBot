@@ -14,6 +14,7 @@ import net.dv8tion.jda.api.interactions.commands.DefaultMemberPermissions;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
+import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
@@ -27,8 +28,8 @@ public class ReactionRolesCommand extends CommandObject {
 
     @Override
     public CommandData getCommand() {
-        return Commands.slash("srm", common.get("command.srm.description"))
-                .addOption(OptionType.CHANNEL, "channel", common.get(common.get("command.srm.type.channel.description")), true)
+        return Commands.slash("srm", common.get("srm.description"))
+                .addOption(OptionType.CHANNEL, "channel", common.get(common.get("srm.type.channel.description")), true)
                 .setDefaultPermissions(DefaultMemberPermissions.enabledFor(VIEW_AUDIT_LOGS));
     }
 
@@ -40,10 +41,14 @@ public class ReactionRolesCommand extends CommandObject {
         TextChannel channel = e.getOption("channel").getAsChannel().asTextChannel();
             channel.sendMessageEmbeds(new EmbedBuilder()
                     .setColor(new Color(47, 49, 54))
-                    .setTitle(common.get("command.srm.embed.title", e.getUserLocale()))
-                    .setDescription(common.get("command.srm.embed.description", e.getUserLocale())).build()).queue();
+                    .setTitle(common.get("srm.embed.title", e.getUserLocale()))
+                    .setDescription(common.get("srm.embed.description", "<@566521375842631686>", "<@802492979750764574>")).build())
+                    .addActionRow(Button.secondary("twitch-button", "Twitch-Benachrichtigungen"))
+                    .addActionRow(Button.secondary("youtube-button", "YouTube-Benachrichtigungen"))
+                    .addActionRow(Button.secondary("discord-button", "Discord-Benachrichtigungen"))
+                    .queue();
 
-            e.reply(common.get("command.srm.reply.success","<#" + e.getOption("channel").getAsChannel().getId() + ">", e.getUserLocale())).setEphemeral(true).queue();
+            e.reply(common.get("srm.reply.success","<#" + e.getOption("channel").getAsChannel().getId() + ">", e.getUserLocale())).setEphemeral(true).queue();
 
         }
 
