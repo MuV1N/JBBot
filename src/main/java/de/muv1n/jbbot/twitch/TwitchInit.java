@@ -14,17 +14,13 @@ public class TwitchInit {
     private final TwitchClient client;
     private final TwitchClientHelper helper;
     private final EventManager manager;
-
     private static TwitchInit instance;
-    private static int i = 0;
 
     public TwitchInit(JBBot bot){
-        Dotenv dotenv = Dotenv.load();
-
         this.builder = TwitchClientBuilder.builder();
         this.client = this.builder
-                .withClientId(dotenv.get("CLIENTID"))
-                .withClientSecret(dotenv.get("CLIENTSECRET"))
+                .withClientId("mjtz04iayqx8gvphe4lbknqlktwbf7")
+                .withClientSecret("pz9lpyrz6pd4snu8t0hr87rkjlnrf1")
                 .withEnableHelix(true).build();
         this.helper = this.client.getClientHelper();
         this.manager = this.client.getEventManager();

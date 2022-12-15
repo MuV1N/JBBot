@@ -19,6 +19,9 @@ dependencies {
     implementation("org.projectlombok:lombok:1.18.24")
     implementation("io.github.cdimascio:dotenv-java:2.3.1")
     implementation("com.github.twitch4j:twitch4j:1.12.0")
+
+    implementation(group = "ch.qos.logback", name = "logback-classic", version = "1.2.10")
+
 }
 
 java {

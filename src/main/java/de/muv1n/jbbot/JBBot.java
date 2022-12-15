@@ -1,6 +1,6 @@
 package de.muv1n.jbbot;
 
-import de.muv1n.jbbot.command.slash.ReactionRolesButtonInteraction;
+import de.muv1n.jbbot.command.slash.roles.ReactionRolesButtonInteraction;
 import de.muv1n.jbbot.command.slash.util.CommandManager;
 import de.muv1n.jbbot.event.JoinEvent;
 import de.muv1n.jbbot.event.QuitEent;
