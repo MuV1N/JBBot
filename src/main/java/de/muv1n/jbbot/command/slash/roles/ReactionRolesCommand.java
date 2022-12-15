@@ -1,4 +1,4 @@
-package de.muv1n.jbbot.command.slash;
+package de.muv1n.jbbot.command.slash.roles;
 
 import de.muv1n.jbbot.JBBot;
 import de.muv1n.jbbot.command.slash.util.CommandObject;
