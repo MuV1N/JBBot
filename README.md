@@ -6,9 +6,10 @@ if you want to help me and the dev team of the Bot to improve the code.
 
 ## Checklist
 - [ ] Social Commands
-- [ ] Join and Quit messages
+- [x] Join and Quit messages
 - [ ] Ticket System
-- [ ] Twitch and YouTube notifications
+- [x] Twitch Notifications
+- [ ] YouTube notifications
 - [ ] Server Manage Commands
 - [ ] Private Channels
 - [ ] Translate in other languages
@@ -17,16 +18,23 @@ if you want to help me and the dev team of the Bot to improve the code.
 If you want to code your self you need to create a class named Token in util
 
 ```Java
-package de.muv1n.jbbot.util;
+package de.muv1n.jbbot;
 
-import lombok.Getter;
+import io.github.cdimascio.dotenv.Dotenv;
 
-@Getter 
-public class Token{
-    
-    public static String token = "YOUR TOKEN HERE!";
-    
+import java.io.IOException;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        Dotenv dotenv = Dotenv.load();
+
+        new JBBot(dotenv.get("TEST_TOKEN"));
+    }
 }
+```
+
+```dotenv
+TOKEN=YOUR_TOKEN_HERE
 ```
 
 
