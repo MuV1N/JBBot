@@ -1,11 +1,11 @@
 package de.muv1n.jbbot.command.slash.util;
 
 import de.muv1n.jbbot.JBBot;
-import de.muv1n.jbbot.command.slash.ReactionRolesCommand;
+import de.muv1n.jbbot.command.slash.message.MessageCommand;
+import de.muv1n.jbbot.command.slash.roles.ReactionRolesCommand;
 import de.muv1n.jbbot.translation.CommonTranslation;
 import net.dv8tion.jda.api.events.interaction.command.CommandAutoCompleteInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
-import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
 import org.jetbrains.annotations.NotNull;
@@ -27,6 +27,7 @@ public class CommandManager extends ListenerAdapter {
     public void load(@NotNull JBBot jbBot, @NotNull CommonTranslation common){
 
         list.add(new ReactionRolesCommand(jbBot, common));
+        list.add(new MessageCommand(jbBot, common));
 
         CommandListUpdateAction commands = jbBot.getBot().updateCommands();
 

@@ -1,17 +1,18 @@
 plugins {
     id("java")
+    application
 }
 
 group = "de.muv1n"
-version = "1.0-SNAPSHOT"
+version = "1.0.0"
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation("net.dv8tion:JDA:5.0.0-beta.1")
-    implementation("org.mongodb:mongodb-driver-reactivestreams:4.7.1")
+    implementation("net.dv8tion:JDA:5.0.0-beta.2")
+    implementation("org.mongodb:mongodb-driver-reactivestreams:4.8.1")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.14.0")
     implementation("org.slf4j:slf4j-simple:2.0.5")
     implementation("com.google.code.gson:gson:2.10")
@@ -21,12 +22,11 @@ dependencies {
     implementation("com.github.twitch4j:twitch4j:1.12.0")
 
     implementation(group = "ch.qos.logback", name = "logback-classic", version = "1.2.10")
-
 }
 
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(17))
+        languageVersion.set(JavaLanguageVersion.of(19))
     }
 }
 
@@ -42,6 +42,9 @@ tasks.withType<Jar> {
             "Class-Path" to classpath.map { cp -> cp.joinToString(" ") { "./lib/" + it.name } }
         )
     }
+}
+application {
+    mainClass.set("de.muv1n.jbbot.Main")
 }
 
 

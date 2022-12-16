@@ -6,7 +6,6 @@ import com.github.twitch4j.TwitchClientBuilder;
 import com.github.twitch4j.TwitchClientHelper;
 import de.muv1n.jbbot.JBBot;
 import de.muv1n.jbbot.twitch.events.StreamGoLiveEvent;
-import io.github.cdimascio.dotenv.Dotenv;
 
 public class TwitchInit {
     
