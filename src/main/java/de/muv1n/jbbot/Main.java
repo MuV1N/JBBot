@@ -8,6 +8,6 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Dotenv dotenv = Dotenv.load();
 
-        new JBBot(dotenv.get("TEST_TOKEN"));
+        new JBBot(dotenv.get("TOKEN"));
     }
 }
