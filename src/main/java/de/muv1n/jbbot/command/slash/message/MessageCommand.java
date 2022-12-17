@@ -3,10 +3,10 @@ package de.muv1n.jbbot.command.slash.message;
 import de.muv1n.jbbot.JBBot;
 import de.muv1n.jbbot.command.slash.util.CommandObject;
 import de.muv1n.jbbot.translation.CommonTranslation;
+import io.github.cdimascio.dotenv.Dotenv;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.CommandAutoCompleteInteraction;
 import net.dv8tion.jda.api.interactions.commands.DefaultMemberPermissions;
-import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.interactions.components.ActionRow;
@@ -45,17 +45,19 @@ public class MessageCommand extends CommandObject {
                 .setRequiredRange(10, 4000)
                 .setRequired(true)
                 .build();
+
         TextInput channelInput = TextInput.create("channelInput", "Text Kanal id", TextInputStyle.SHORT)
                 .setPlaceholder("Info = 934204263259861052")
                 .setRequiredRange(5, 100)
                 .setRequired(true)
+                .setValue(Dotenv.load().get("INFORMATION_CHANNEL_ID"))
                 .build();
 
         Modal modal = Modal.create("messageCommand", "Nachricht")
                 .addActionRows(ActionRow.of(titleInput)).addActionRows(ActionRow.of(messageInput)).addActionRows(ActionRow.of(channelInput)).build();
 
         e.replyModal(modal).queue();
-
+        System.out.println("Message Command repliedied Modal");
     }
 
     @Override
