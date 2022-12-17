@@ -3,6 +3,7 @@ package de.muv1n.jbbot;
 import de.muv1n.jbbot.command.slash.message.MessageCommandModalInteract;
 import de.muv1n.jbbot.command.slash.roles.ReactionRolesButtonInteraction;
 import de.muv1n.jbbot.command.slash.util.CommandManager;
+import de.muv1n.jbbot.database.DatabaseMain;
 import de.muv1n.jbbot.event.JoinEvent;
 import de.muv1n.jbbot.event.QuitEent;
 import de.muv1n.jbbot.translation.CommonTranslation;
@@ -15,14 +16,16 @@ import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 @AllArgsConstructor
 public class JBBot {
     private final JDA bot;
+    private final DatabaseMain databaseMain;
     private final CommonTranslation common;
 
-    public JBBot(String key) throws IOException {
+    public JBBot(String key) throws IOException, SQLException {
         JDA bot;
         JDABuilder builder = JDABuilder.createDefault(key);
         ArrayList<GatewayIntent> intent = new ArrayList<>();
@@ -45,6 +48,8 @@ public class JBBot {
         this.bot = bot;
         System.out.println("§2BOT ONLINE");
         commandManager.load(this, this.common);
+        this.databaseMain = new DatabaseMain();
+        new DatabaseMain();
 
         //new TwitchInit(this);
     }
@@ -52,9 +57,11 @@ public class JBBot {
     public JDA getBot() {
         return bot;
     }
-
     public CommonTranslation getCommon() {
         return common;
     }
 
+    public DatabaseMain getDatabaseMain() {
+        return databaseMain;
+    }
 }

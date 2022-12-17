@@ -11,6 +11,7 @@ if you want to help me and the dev team of the Bot to improve the code.
 - [x] Twitch Notifications
 - [ ] YouTube notifications
 - [ ] Server Manage Commands
+- [x] Message Command
 - [ ] Private Channels
 - [ ] Translate in other languages
 
